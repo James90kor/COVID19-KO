@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="moment.js"></script>
+    <script src="xml2json.js"></script>
   </head>
   <body>
     <header>
@@ -43,22 +44,21 @@
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
               if (xhr.readyState == 4) {
-                document.getElementById('response').innerHTML = xhr.responseText;
-
-                // 중간결과 확인용 코드
                 document.getElementById('temp').innerText = requestURL;
+                var covid19Data = xml2json(requestURL, "");
+                document.getElementById('response').innerText = covid19Data;
               }
             }
             xhr.open('GET', requestURL);
             xhr.send();
           }
-          dataGet();
+          dataGet(); // 웹 페이지 최초 로드시 한 번 실행되도록 함
         </script>
         <p id="temp">
 
         </p>
         <p>
-          ---------- ▲ temp / ▼ response ----------
+          ▲ temp / ▼ response
         </p>
         <p id="response">
 
@@ -67,10 +67,10 @@
           <script>targetDatePrint()</script>
         </p>
         <p id="buttonArea">
-          <input id="btnLeft" type="button" value="◀" style="width:20%; height:40px; font-size:20px" onclick="goYstrdy(); btnOn('btnRight'); dataGet();">
-          <input id="btnToday" type="button" value="오늘" style="width:50%; height:40px; font-size:20px" onclick="goToday(); btnOff('btnRight'); dataGet();">
-          <input id="btnRight" type="button" disabled value="▶" style="width:20%; height:40px; font-size:20px" onclick="goTmrw(); dataGet();
-            if (targetDate.format('YYYYMMDD') === moment().format('YYYYMMDD')) {btnOff('btnRight');}">
+          <input id="btnLeft" type="button" value="◀" style="width:25%; height:50px; font-size:30px" onclick="goYstrdy(); btnOn('btnRight'); dataGet();">
+          <input id="btnToday" type="button" value="오늘" style="width:40%; height:50px; font-size:30px" onclick="goToday(); btnOff('btnRight'); dataGet();">
+          <input id="btnRight" type="button" disabled value="▶" style="width:25%; height:50px; font-size:30px" onclick="goTmrw();
+            if (targetDate.format('YYYYMMDD') === moment().format('YYYYMMDD')) {btnOff('btnRight');} dataGet();">
         </p>
       </div>
     </header>
