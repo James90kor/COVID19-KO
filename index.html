@@ -38,7 +38,7 @@
             var url01 = 'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey='
             var url02 = '&pageNo=1&numOfRows=10&startCreateDt='
             var url03 = '&endCreateDt='
-            var requestURL = "https://cors.bridged.cc/" + url01 + key + url02 + startDate + url03 + endDate
+            var requestURL = url01 + key + url02 + startDate + url03 + endDate
 
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
