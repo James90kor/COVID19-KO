@@ -45,8 +45,10 @@
             xhr.onreadystatechange = function() {
               if (xhr.readyState == 4) {
                 document.getElementById('temp').innerText = requestURL;
-                var covid19Data = xml2json(requestURL, "");
+                var covid19Data = xml2json(xhr.responseXML, "");
                 document.getElementById('response').innerText = covid19Data;
+
+                document.getElementById('infectedTotal').innerText = covid19Data.response.header.body.items.item[0].decidecnt;
               }
             }
             xhr.open('GET', requestURL);
