@@ -47,7 +47,7 @@
                 document.getElementById('temp').innerText = requestURL;
                 var covid19Data = xml2json(xhr.responseXML, "");
                 document.getElementById('response').innerText = covid19Data;
-
+                document.getElementById('infectedNew').innerText = covid19Data.response.header.body.items.item[0].decidecnt - covid19Data.response.header.body.items.item[1].decidecnt;
                 document.getElementById('infectedTotal').innerText = covid19Data.response.header.body.items.item[0].decidecnt;
               }
             }
