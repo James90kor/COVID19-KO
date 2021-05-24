@@ -44,11 +44,11 @@
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
               if (xhr.readyState == 4) {
-                document.getElementById('temp').innerText = requestURL;
-                var covid19Data = xml2json(xhr.responseXML, "");
-                document.getElementById('response').innerText = covid19Data;
-                document.getElementById('infectedNew').innerText = covid19Data.response.header.body.items.item[0].decidecnt - covid19Data.response.header.body.items.item[1].decidecnt;
-                document.getElementById('infectedTotal').innerText = covid19Data.response.header.body.items.item[0].decidecnt;
+                var covid19Data = xml2json(xhr.responseXML, "\t");
+                document.getElementById('temp01').innerText = requestURL;
+                document.getElementById('temp02').innerText = covid19Data;
+
+                var infectedNew = 100; //테스트용
               }
             }
             xhr.open('GET', requestURL);
@@ -56,13 +56,13 @@
           }
           dataGet(); // 웹 페이지 최초 로드시 한 번 실행되도록 함
         </script>
-        <p id="temp">
+        <p id="temp01">
 
         </p>
         <p>
-          ▲ temp / ▼ response
+          ▲ temp01 / ▼ temp02
         </p>
-        <p id="response">
+        <p id="temp02">
 
         </p>
         <p id="targetDate">
@@ -79,40 +79,66 @@
     <div>
       <h2>확진자 수</h2>
       <p id="infectedNew">
-        ___명
+        <script>
+          document.write(infectedNew) // 신규확진
+          document.write(' 명')
+        </script>
       </p>
       <p id="infectedTotal">
-        (누적: ______명)
+        <script>
+          document.write('(누적: ')
+          document.write() // 누적확진
+          document.write(' 명)')
+        </script>
       </p>
     </div>
     <div>
       <h2>격리 중</h2>
       <p id="recovering">
-        ______명
+        <script>
+          document.write() // 격리중
+          document.write(' 명')
+        </script>
       </p>
     </div>
     <div>
       <h2>격리해제</h2>
       <p id="recoveredNew">
-        ___명
+        <script>
+          document.write() // 신규해제
+          document.write(' 명')
+        </script>
       </P>
       <p id="recoveredTotal">
-        (누적: ______명)
+        <script>
+          document.write('()누적: ')
+          document.write() // 누적해제
+          document.write(' 명)')
+        </script>
       </p>
     </div>
     <div>
       <h2>사망자 수</h2>
       <p id="deathNew">
-        ___명
+        <script>
+          document.write() // 신규사망
+          document.write(' 명')
+        </script>
       </p>
       <p id="deathTotal">
-        (누적: ______명)
+        <script>
+          document.write('(누적: ')
+          document.write() // 누적사망
+          document.write(' 명)')
+        </script>
       </p>
     </div>
     <footer>
-      <p id="notice">
-        ※ 당일 확진자 수가 발표되지 않은 경우 데이터 미표기
-      </p>
+      <div>
+        <p id="notice">
+          ※ 당일 확진자 수가 발표되지 않은 경우 데이터 미표기
+        </p>
+      </div>
     </footer>
   </body>
 </html>
